@@ -1,12 +1,7 @@
 <template>
-  <b-container class="city-card">
-    <b-row>
-      <city-card></city-card>
-      <city-card></city-card>
-      <city-card></city-card>
-      <city-card></city-card>
-      <city-card></city-card>
-      <city-card></city-card>
+  <b-container class="city-card" >
+    <b-row v-if="$store.state.favorites">
+      <city-card v-for="city in $store.state.favorites" :key="city.name" :city="city"></city-card>
     </b-row>
   </b-container>
 </template>
@@ -18,7 +13,11 @@ export default {
   components: {
     cityCard: CityCard,
   },
-  setup() {},
+  data(){
+      return{
+          favorites: this.$store.state.favorites
+      }
+  }
 };
 </script>
 

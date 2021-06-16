@@ -62,7 +62,7 @@ export default {
     },
     getCity(cityResult) {
       this.citiesResults = null;
-      this.selectedCity = cityResult.LocalizedName;
+      this.selectedCity = cityResult;
       console.log("result clicked", cityResult);
       const weatherDetails = weatherDetailsJson[1];
       this.weatherDetailsResult = weatherDetails;

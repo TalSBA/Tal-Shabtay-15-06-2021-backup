@@ -36,21 +36,8 @@ export default {
     },
   },
   watch: {
-    city: function (newValue, oldValue) {
-      this.$emit("on-search", newValue);
-      //   const newCities = cities.filter(
-      //     (cityObj) =>
-      //       newValue &&
-      //       cityObj.LocalizedName.toLowerCase().includes(newValue.toLowerCase())
-      //   );
-      //   this.citiesResults = newCities;
-      //   this.$emit("search-results", newCities);
-      //   console.log(newCities);
-      //   axios
-      //     .get(
-      //       `http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=NjkcZ7AM3eRqw4D9MjGNc7svCBY98D69&q=${newValue}`
-      //     )
-      //     .then((response) => console.log(response));
+    city(value) {
+      this.$emit("on-search", value);
     },
   },
 };

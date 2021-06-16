@@ -4,7 +4,9 @@
       <b-col>
         <img :src="imageSrc" />
         <div class="city-celsius">
-          <p><strong>{{ city }}</strong></p>
+          <p>
+            <strong>{{ city.LocalizedName }}</strong>
+          </p>
           <p>
             {{ details.Temperature.Metric.Value }}
             <b-icon class="degrees-icon" icon="dot" aria-hidden="true"></b-icon>
@@ -18,6 +20,7 @@
           id="favorite"
           icon="star"
           aria-hidden="true"
+          @click="addTofavorites"
         ></b-icon>
         <b-tooltip target="favorite" triggers="hover"
           >Add to favorites</b-tooltip
@@ -52,7 +55,16 @@ export default {
         ".png"),
     };
   },
-  setup() {},
+  methods: {
+    addTofavorites() {
+      console.log(this.city);
+      this.$store.dispatch("addTofavorites", {
+        name: this.city.LocalizedName,
+        temperature: this.details.Temperature.Metric.Value,
+        weatherText: this.details.WeatherText,
+      });
+    },
+  },
 };
 </script>
 
@@ -62,7 +74,8 @@ export default {
   text-align: center;
 }
 
-.weather-details h1, .city-celsius{
+.weather-details h1,
+.city-celsius {
   color: white;
 }
 .weather-details .row {
@@ -82,8 +95,8 @@ export default {
   font-size: 18px;
 }
 
-.weather-details .city-celsius p strong{
-    font-size: 22px;
+.weather-details .city-celsius p strong {
+  font-size: 22px;
 }
 
 .weather-details .favorite-icon {
