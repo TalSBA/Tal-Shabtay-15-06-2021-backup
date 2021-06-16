@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="App">
     <menu-bar></menu-bar>
     <router-view></router-view>
   </div>
@@ -20,5 +20,11 @@ export default {
 </script>
 
 <style>
+.App{
+  background-image: url('./assets/images.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
 </style>
  
