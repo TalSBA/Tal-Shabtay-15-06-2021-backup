@@ -38,11 +38,15 @@
         <h1>{{ details.WeatherText }}</h1>
       </b-col>
     </b-row>
-    <b-row class="days">
-      <b-col v-for="day in fiveDaysWeatherResult.DailyForecasts" :key="day.Date"
-        ><day-degrees :day="day"></day-degrees
-      ></b-col>
-    </b-row>
+    <b-container>
+      <b-row class="days">
+        <day-degrees
+          v-for="day in fiveDaysWeatherResult.DailyForecasts"
+          :key="day.Date"
+          :day="day"
+        ></day-degrees>
+      </b-row>
+    </b-container>
   </div>
 </template>
 
@@ -77,7 +81,7 @@ export default {
       });
     },
     removeFromFavorites() {
-      this.$store.dispatch("deleteFromFavorites", this.city.Key);
+      this.$store.dispatch("deleteFromFavorites", this.city);
     },
   },
   computed: {
@@ -91,7 +95,8 @@ export default {
     },
     favoriteExist() {
       return (
-        this.favorites && this.favorites.find((city) => city.Key === this.city.Key)
+        this.favorites &&
+        this.favorites.find((city) => city.Key === this.city.Key)
       );
     },
   },
@@ -139,12 +144,12 @@ export default {
 }
 
 .weather-details .days {
-  width: 1000px;
   margin: 0 auto;
   margin-top: 80px;
 }
 
 .weather-details .col {
-  padding: 10px;
+  padding: 1px;
+  margin: 0;
 }
 </style>

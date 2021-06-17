@@ -1,5 +1,6 @@
 const state = {
-    favorites: []
+    favorites: [],
+    selectedFavorite: null
 }
 
 const mutations = {
@@ -11,6 +12,9 @@ const mutations = {
     },
     'DELETE_FROM_FAVORITES'(state, city) {
         state.favorites.splice(state.favorites.indexOf(city), 1);
+    },
+    'SET_SELECTED_FAVORITE'(state, city){
+        state.selectedFavorite = city;
     }
 }
 
@@ -21,12 +25,18 @@ const actions = {
     },
     deleteFromFavorites({ commit }, city) {
         commit('DELETE_FROM_FAVORITES', city);
+    },
+    setSelectedFavorite({ commit }, city) {
+        commit('SET_SELECTED_FAVORITE', city);
     }
 };
 
 const getters = {
     favorites: state => {
         return state.favorites;
+    },
+    selectedFavorite: state =>{
+        return state.selectedFavorite;
     }
 };
 

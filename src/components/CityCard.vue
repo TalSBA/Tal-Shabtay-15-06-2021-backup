@@ -1,21 +1,24 @@
 <template>
-  <router-link to="/home" activeClass="active" tag="li" :city="city">
-    <b-col>
-      <b-card v-if="city" class="favorite-card">
-        <b-icon
-          class="favorite-icon"
-          id="favorite"
-          :icon="icon"
-          @click="handleFavorites"
-        ></b-icon>
-        <b-card-title>{{ city.LocalizedName }}</b-card-title>
-        <b-card-text> {{ cityDetails.Temperature.Metric.Value }} </b-card-text>
-        <b-card-img :src="imgSrc" :alt="cityDetails.WeatherIcon"></b-card-img>
-      </b-card>
-    </b-col>
-  </router-link>
+  <b-col class="favorite-container">
+    <b-card v-if="city && cityDetails" class="favorite-card">
+      <b-icon
+        class="favorite-icon"
+        id="favorite"
+        :icon="icon"
+        @click="handleFavorites"
+      ></b-icon>
+      <router-link to="/home" activeClass="active" tag="span">
+        <div @click="setSelected">
+          <b-card-title>{{ city.LocalizedName }}</b-card-title>
+          <b-card-text>
+            {{ cityDetails.Temperature.Metric.Value }}
+          </b-card-text>
+          <b-card-img :src="imgSrc" :alt="String(cityDetails.WeatherIcon)"></b-card-img>
+        </div>
+      </router-link>
+    </b-card>
+  </b-col>
 </template>
-
 <script>
 import { mapGetters } from "vuex";
 import { getCityDetails } from "../services";
@@ -50,7 +53,10 @@ export default {
       });
     },
     removeFromFavorites() {
-      this.$store.dispatch("deleteFromFavorites", this.city.Key);
+      this.$store.dispatch("deleteFromFavorites", this.city);
+    },
+    setSelected() {
+      this.$store.dispatch("setSelectedFavorite", this.city);
     },
   },
   computed: {
@@ -73,9 +79,13 @@ export default {
 </script>
 
 <style>
+.favorite-container {
+  display: inline-block;
+}
+
 .favorite-icon {
   font-size: 20px;
-  color: rgb(255, 166, 0) !important;
+  color: rgb(255, 166, 0);
   cursor: pointer;
 }
 .favorite-card {

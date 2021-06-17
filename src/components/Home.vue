@@ -18,9 +18,9 @@
 import SearchBar from "./SearchBar.vue";
 import WeatherDetails from "./WeatherDetails.vue";
 import { getCities, getCityDetails, getFiveDaysWeather } from "../services";
+import { mapGetters } from "vuex";
 
 export default {
-  props: ["city"],
   components: {
     searchBar: SearchBar,
     weatherDetails: WeatherDetails,
@@ -34,12 +34,11 @@ export default {
     };
   },
   async created() {
-    console.log('city props', this.city);
-    if (this.city) {
-      await this.onSearchChanged(this.city.LocalizedName);
+    if (this.selectedFavorite) {
+      await this.onSearchChanged(this.selectedFavorite.LocalizedName);
       await this.getCity({
-        LocalizedName: this.city.LocalizedName,
-        Key: this.city.Key,
+        LocalizedName: this.selectedFavorite.LocalizedName,
+        Key: this.selectedFavorite.Key,
       });
     } else {
       await this.onSearchChanged("Tel Aviv");
@@ -49,9 +48,12 @@ export default {
       });
     }
   },
+  computed: {
+    ...mapGetters(["selectedFavorite"]),
+  },
   methods: {
     async onSearchChanged(value) {
-      if (value) this.citiesResults = await getCities(value);
+      this.citiesResults = await getCities(value);
     },
     async getCity(cityResult) {
       this.citiesResults = null;
@@ -59,6 +61,7 @@ export default {
       console.log("result clicked", cityResult);
       this.weatherDetailsResult = await getCityDetails(cityResult);
       this.fiveDaysWeatherResult = await getFiveDaysWeather(cityResult.Key);
+      this.$store.dispatch("setSelectedFavorite", null);
     },
   },
 };

@@ -14,11 +14,15 @@ export async function getCities(value) {
     );
     citiesResults = newCities;
 
-//    await axios
-//         .get(
-//             `http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=NjkcZ7AM3eRqw4D9MjGNc7svCBY98D69&q=${value}`
-//         )
-//         .then((response) => { (citiesResults = response.data); console.log(response.data); });
+    //    await axios
+    //         .get(
+    //             `http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=NjkcZ7AM3eRqw4D9MjGNc7svCBY98D69&q=${value}`
+    //         )
+    //         .then((response) => { (citiesResults = response.data); console.log(response.data); })
+    //          .catch(error => {
+    //              console.log(error)
+    //              citiesResults = {error: true, message: error};
+    //          });
 
     return citiesResults;
 }
@@ -37,6 +41,10 @@ export async function getCityDetails(cityResult) {
     //         weatherDetailsResult = response.data[0];
     //         console.log(response.data[0]);
     //     });
+    //          .catch(error => {
+    //              console.log(error)
+    //              weatherDetailsResult = {error: true, message: error};
+    //          });
     return weatherDetailsResult;
 }
 
@@ -51,5 +59,9 @@ export async function getFiveDaysWeather(cityKey) {
     //         `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${cityKey}?apikey=NjkcZ7AM3eRqw4D9MjGNc7svCBY98D69&metric=true`
     //     )
     //     .then((response) => { (fiveDaysWeatherResult = response.data); console.log(response.data); });
+    //          .catch(error => {
+    //              console.log(error)
+    //              fiveDaysWeatherResult = {error: true, message: error};
+    //          });
     return fiveDaysWeatherResult;
 }

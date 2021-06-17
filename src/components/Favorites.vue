@@ -4,7 +4,7 @@
       <div v-if="favorites.length > 0">
         <city-card
           v-for="city in favorites"
-          :key="city"
+          :key="city.Key"
           :city="city"
         ></city-card>
       </div>
