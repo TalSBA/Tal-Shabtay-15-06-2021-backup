@@ -1,23 +1,25 @@
-const state ={
+const state = {
     favorites: []
 }
 
 const mutations = {
-    'ADD_TO_FAVORITES'(state, city){
-        state.favorites.push(city);
-        console.log(state.favorites);
+    'ADD_TO_FAVORITES'(state, cityKey) {
+        if (!state.favorites) {
+            state.favorites = [];
+        }
+        state.favorites.push(cityKey);
     },
-    'DELETE_FROM_FAVORITES'(state, city){
-       this.state.favorites = state.favorites.splice(city,1);
+    'DELETE_FROM_FAVORITES'(state, city) {
+        this.state.favorites = state.favorites.splice(city, 1);
     }
 }
 
 
 const actions = {
-    addTofavorites({commit}, city) {
+    addTofavorites({ commit }, city) {
         commit('ADD_TO_FAVORITES', city);
     },
-    deleteFromFavorites({commit}, city){
+    deleteFromFavorites({ commit }, city) {
         commit('DELETE_FROM_FAVORITES', city);
     }
 };

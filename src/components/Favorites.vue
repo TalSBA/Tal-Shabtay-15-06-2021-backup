@@ -1,13 +1,14 @@
 <template>
   <b-container class="city-card" >
     <b-row v-if="$store.state.favorites">
-      <city-card v-for="city in $store.state.favorites" :key="city.name" :city="city"></city-card>
+      <city-card v-for="city in favorites" :key="city.name" :city="city"></city-card>
     </b-row>
   </b-container>
 </template>
 
 <script>
 import CityCard from "./CityCard.vue";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
@@ -15,8 +16,10 @@ export default {
   },
   data(){
       return{
-          favorites: this.$store.state.favorites
       }
+  },
+  computed:{
+    ...mapGetters(['favorites'])
   }
 };
 </script>

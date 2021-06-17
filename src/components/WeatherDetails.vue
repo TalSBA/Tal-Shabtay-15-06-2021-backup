@@ -18,12 +18,18 @@
         <b-icon
           class="favorite-icon"
           id="favorite"
-          icon="star"
+          :icon="icon"
           aria-hidden="true"
-          @click="addTofavorites"
+          @click="handleFavorites"
         ></b-icon>
-        <b-tooltip target="favorite" triggers="hover"
+        <b-tooltip v-if="icon === 'star'" target="favorite" triggers="hover"
           >Add to favorites</b-tooltip
+        >
+        <b-tooltip
+          v-if="icon === 'star-fill'"
+          target="favorite"
+          triggers="hover"
+          >Remove from favorites</b-tooltip
         >
       </b-col>
     </b-row>
@@ -42,6 +48,7 @@
 
 <script>
 import DayDegrees from "./DayDegreesCard.vue";
+import { mapGetters } from "vuex";
 
 export default {
   props: ["city", "details", "five-days-weather-result"],
@@ -56,13 +63,34 @@ export default {
     };
   },
   methods: {
-    addTofavorites() {
-      console.log(this.city);
-      this.$store.dispatch("addTofavorites", {
-        name: this.city.LocalizedName,
-        temperature: this.details.Temperature.Metric.Value,
-        weatherText: this.details.WeatherText,
-      });
+    handleFavorites() {
+      if (this.favoriteExist) {
+        this.removeFromFavorites();
+      } else {
+        this.addToFavorites();
+      }
+    },
+    addToFavorites() {
+      this.$store.dispatch("addTofavorites", this.city.Key);
+    },
+    removeFromFavorites() {
+      this.$store.dispatch("deleteFromFavorites", this.city.Key);
+    },
+  },
+  computed: {
+    ...mapGetters(["favorites"]),
+    icon() {
+      if (this.favoriteExist) {
+        return "star-fill";
+      } else {
+        return "star";
+      }
+    },
+    favoriteExist() {
+      return (
+        this.favorites &&
+        this.favorites.find((city) => city === this.city.Key)
+      );
     },
   },
 };
@@ -112,5 +140,9 @@ export default {
   width: 1000px;
   margin: 0 auto;
   margin-top: 80px;
+}
+
+.weather-details .col{
+  padding: 10px;
 }
 </style>
