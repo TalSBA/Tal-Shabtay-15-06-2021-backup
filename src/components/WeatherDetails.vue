@@ -71,7 +71,10 @@ export default {
       }
     },
     addToFavorites() {
-      this.$store.dispatch("addTofavorites", this.city.Key);
+      this.$store.dispatch("addTofavorites", {
+        Key: this.city.Key,
+        LocalizedName: this.city.LocalizedName,
+      });
     },
     removeFromFavorites() {
       this.$store.dispatch("deleteFromFavorites", this.city.Key);
@@ -88,8 +91,7 @@ export default {
     },
     favoriteExist() {
       return (
-        this.favorites &&
-        this.favorites.find((city) => city === this.city.Key)
+        this.favorites && this.favorites.find((city) => city.Key === this.city.Key)
       );
     },
   },
@@ -142,7 +144,7 @@ export default {
   margin-top: 80px;
 }
 
-.weather-details .col{
+.weather-details .col {
   padding: 10px;
 }
 </style>

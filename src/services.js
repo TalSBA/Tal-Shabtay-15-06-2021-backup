@@ -4,7 +4,7 @@ import weatherDetailsJson from "./data/weatherDetails.json";
 import fiveDaysWeatherJson from "./data/fiveDaysWeather.json";
 
 
-export function getCities(value) {
+export async function getCities(value) {
     let citiesResults = null;
     console.log("value", value);
     const newCities = cities.filter(
@@ -14,42 +14,42 @@ export function getCities(value) {
     );
     citiesResults = newCities;
 
-    //   axios
-    //     .get(
-    //       `http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=NjkcZ7AM3eRqw4D9MjGNc7svCBY98D69&q=${value}`
-    //     )
-    //     .then((response) => (citiesResults = response.data));
+//    await axios
+//         .get(
+//             `http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=NjkcZ7AM3eRqw4D9MjGNc7svCBY98D69&q=${value}`
+//         )
+//         .then((response) => { (citiesResults = response.data); console.log(response.data); });
 
     return citiesResults;
 }
 
-export function getCityDetails(cityResult) {
+export async function getCityDetails(cityResult) {
     let weatherDetailsResult = null;
     console.log("result clicked", cityResult);
     const weatherDetails = weatherDetailsJson[1];
     weatherDetailsResult = weatherDetails;
     console.log(weatherDetailsResult);
-    //   axios
+    // await axios
     //     .get(
-    //       `http://dataservice.accuweather.com/currentconditions/v1/${cityResult.Key}?apikey=NjkcZ7AM3eRqw4D9MjGNc7svCBY98D69&details=false`
+    //         `http://dataservice.accuweather.com/currentconditions/v1/${cityResult.Key}?apikey=NjkcZ7AM3eRqw4D9MjGNc7svCBY98D69&details=false`
     //     )
     //     .then((response) => {
-    //       weatherDetailsResult = response.data[0];
-    //       console.log(response.data[0]);
+    //         weatherDetailsResult = response.data[0];
+    //         console.log(response.data[0]);
     //     });
     return weatherDetailsResult;
 }
 
-export function getFiveDaysWeather(cityKey) {
+export async function getFiveDaysWeather(cityKey) {
     let fiveDaysWeatherResult = null;
 
     fiveDaysWeatherResult = fiveDaysWeatherJson[1];
 
 
-    //   axios
+    // await axios
     //     .get(
-    //       `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${cityKey}?apikey=NjkcZ7AM3eRqw4D9MjGNc7svCBY98D69&metric=true`
+    //         `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${cityKey}?apikey=NjkcZ7AM3eRqw4D9MjGNc7svCBY98D69&metric=true`
     //     )
-    //     .then((response) => (fiveDaysWeatherResult = response.data));
+    //     .then((response) => { (fiveDaysWeatherResult = response.data); console.log(response.data); });
     return fiveDaysWeatherResult;
 }

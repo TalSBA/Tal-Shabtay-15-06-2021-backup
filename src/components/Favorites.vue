@@ -1,7 +1,16 @@
 <template>
-  <b-container class="city-card" >
-    <b-row v-if="$store.state.favorites">
-      <city-card v-for="city in favorites" :key="city.name" :city="city"></city-card>
+  <b-container class="city-card">
+    <b-row>
+      <div v-if="favorites.length > 0">
+        <city-card
+          v-for="city in favorites"
+          :key="city"
+          :city="city"
+        ></city-card>
+      </div>
+    </b-row>
+    <b-row v-if="favorites.length === 0">
+      <h1>No Favorites</h1>
     </b-row>
   </b-container>
 </template>
@@ -14,13 +23,12 @@ export default {
   components: {
     cityCard: CityCard,
   },
-  data(){
-      return{
-      }
+  data() {
+    return {};
   },
-  computed:{
-    ...mapGetters(['favorites'])
-  }
+  computed: {
+    ...mapGetters(["favorites"]),
+  },
 };
 </script>
 
@@ -28,5 +36,10 @@ export default {
 .city-card .card {
   margin: 20px;
   text-align: center;
+}
+.city-card h1 {
+  color: white;
+  text-align: center;
+  margin-top: 30px;
 }
 </style>

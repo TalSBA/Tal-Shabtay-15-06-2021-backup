@@ -3,14 +3,14 @@ const state = {
 }
 
 const mutations = {
-    'ADD_TO_FAVORITES'(state, cityKey) {
+    'ADD_TO_FAVORITES'(state, city) {
         if (!state.favorites) {
             state.favorites = [];
         }
-        state.favorites.push(cityKey);
+        state.favorites.push(city);
     },
     'DELETE_FROM_FAVORITES'(state, city) {
-        this.state.favorites = state.favorites.splice(city, 1);
+        state.favorites.splice(state.favorites.indexOf(city), 1);
     }
 }
 
