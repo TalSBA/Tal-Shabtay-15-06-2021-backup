@@ -40,6 +40,9 @@ export default {
   created() {
     this.publicPath =
       process.env.NODE_ENV === "production" ? "/Tal-Shabtay-15-06-2021/" : "";
+      console.log("env", process.env.NODE_ENV);
+      console.log("publicPath", this.publicPath);
+
     this.rootPath = this.publicPath + "/";
     this.homePath = this.publicPath + "/home";
     this.favoritesPath = this.publicPath + "/favorites";
