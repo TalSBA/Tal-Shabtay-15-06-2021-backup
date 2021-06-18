@@ -19,7 +19,7 @@ module.exports = {
     path: config.build.assetsRoot,
     filename: '[name].js',
     publicPath: process.env.NODE_ENV === 'production'
-      ? config.build.assetsPublicPath
+      ? '/Tal-Shabtay-15-06-2021/'
       : config.dev.assetsPublicPath
   },
   resolve: {
