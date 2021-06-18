@@ -20,11 +20,11 @@ export default {
 </script>
 
 <style>
-.App{
-  background-image: url('./assets/images.jpg');
+.App {
+  background-image: url("./assets/images.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100vh;
+  height: calc(100vh - 20px);
 }
 </style>
  

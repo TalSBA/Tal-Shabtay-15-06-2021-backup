@@ -30,7 +30,11 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      rootPath: "/" + process.env.PUBLIC_URL + "/",
+      homePath: "/" + process.env.PUBLIC_URL + "/home",
+      favoritesPath: "/" + process.env.PUBLIC_URL + "/favorites",
+    };
   },
 };
 </script>
