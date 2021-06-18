@@ -46,6 +46,8 @@ export default {
   width: 180px;
 }
 
+
+
 .card:hover {
   box-shadow: 0 14px 28px rgba(255, 253, 253, 0.418),
     0 10px 10px rgba(0, 0, 0, 0.22);
